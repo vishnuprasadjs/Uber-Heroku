@@ -21,8 +21,9 @@ folium==0.12.1
 gitdb==4.0.5
 GitPython==3.1.14
 idna==2.10
+importlib-metadata==3.7.3
 ipykernel==5.5.0
-ipython==7.21.0
+ipython==7.16.1
 ipython-genutils==0.2.0
 ipywidgets==7.6.3
 jedi==0.18.0
@@ -40,9 +41,9 @@ nbconvert==6.0.7
 nbformat==5.1.2
 nest-asyncio==1.5.1
 notebook==6.2.0
-numpy==1.20.1
+numpy==1.19.5
 packaging==20.9
-pandas==1.2.3
+pandas==1.1.5
 pandocfilters==1.4.3
 parso==0.8.1
 pickleshare==0.7.5
@@ -50,6 +51,7 @@ Pillow==8.1.2
 prometheus-client==0.9.0
 prompt-toolkit==3.0.17
 protobuf==3.15.6
+pyarrow==3.0.0
 pycparser==2.20
 pydeck==0.6.1
 Pygments==2.8.1
@@ -63,7 +65,7 @@ pywinpty==0.5.7
 pyzmq==22.0.3
 requests==2.25.1
 scikit-learn==0.24.1
-scipy==1.6.1
+scipy==1.5.4
 Send2Trash==1.5.0
 six==1.15.0
 smmap==3.0.5
@@ -75,7 +77,8 @@ threadpoolctl==2.1.0
 toml==0.10.2
 toolz==0.11.1
 tornado==6.1
-traitlets==5.0.5
+traitlets==4.3.3
+typing-extensions==3.7.4.3
 tzlocal==2.1
 urllib3==1.26.3
 validators==0.18.2
@@ -84,3 +87,4 @@ wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
 wincertstore==0.2
+zipp==3.4.1
