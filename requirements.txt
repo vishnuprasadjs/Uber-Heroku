@@ -2,7 +2,6 @@ altair==4.1.0
 argon2-cffi==20.1.0
 astor==0.8.1
 async-generator==1.10
-attrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1605083924122/work
 backcall==0.2.0
 base58==2.1.0
 bleach==3.3.0
@@ -14,7 +13,6 @@ cffi==1.14.5
 chardet==3.0.4
 click==7.1.2
 click-plugins==1.1.1
-cligj @ file:///home/conda/feedstock_root/build_artifacts/cligj_1605902088619/work
 colorama==0.4.4
 cycler==0.10.0
 decorator==4.4.2
@@ -76,13 +74,11 @@ pywin32==300
 pywinpty==0.5.7
 pyzmq==22.0.3
 requests==2.24.0
-Rtree @ file:///D:/bld/rtree_1610147304955/work
 scikit-learn==0.24.1
 scipy==1.6.1
 seaborn==0.11.1
 Send2Trash==1.5.0
 Shapely==1.7.1
-six @ file:///home/conda/feedstock_root/build_artifacts/six_1590081179328/work
 sklearn==0.0
 smmap==3.0.5
 streamlit==0.76.0
