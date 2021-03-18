@@ -15,9 +15,7 @@ load_dotenv()
 
 ORS_API_KEY = os.getenv('ORS_API_KEY')
 
-pkl_filename = "Est_time_pred.pkl"
-with open(pkl_filename, 'rb') as file:
-    regressor = pickle.load(file)
+
     
 categories_to_hour = {
     1: [0, 6],
@@ -89,6 +87,7 @@ def get_route(source, destination, date,departure_time,holiday):
         location=(destination[0],destination[1]),
         icon=folium.Icon(icon='stop',color='red')
     ).add_to(m)
+    st.write("Expected travel time is: ", travel_time,"minutes")
     folium_static(m)
 
 
@@ -106,11 +105,11 @@ def run():
     time = st.sidebar.time_input('Select time', datetime.time(0,00))
     st.write('Date of Journey:',date)
     st.write('Time:',time)
-    coordinate_list=['Select',(12.946538, 77.579975),(13.04438892,77.60185844),(12.95275348,77.72982887)]
     source = st.sidebar.selectbox('Choose the source',coordinate_list)
     st.write('You selected source:', source)
     destination = st.sidebar.selectbox('Choose the destination',coordinate_list)
-    st.write('You selected destination:', destination) 
+    st.write('You selected destination:', destination)
+    
     url='https://www.google.com/maps/dir/{},{}/{},{}'.format(source[0],source[1],destination[0],destination[1])
 
     holiday_check = st.sidebar.checkbox("Holiday")
@@ -119,11 +118,15 @@ def run():
     else:
         holiday=0
     departure_time = time
-    col1,col2=st.sidebar.beta_columns(2)
-    if col1.button('Navigate'):
-        get_route(source, destination, date,departure_time,holiday)
-    if col2.button("Google Map"):
-        webbrowser.open(url)
+    
+    if source != destination:
+        col1,col2=st.sidebar.beta_columns(2)
+        if col1.button('Navigate'):
+            get_route(source, destination, date,departure_time,holiday)
+        if col2.button("Google Map"):
+            webbrowser.open(url)
+    else:
+        st.warning("please choose different source or destination")
      
 
 
@@ -132,11 +135,24 @@ if __name__ == "__main__":
     html_temp = """ 
     <div style ="background-color:yellow;padding:13px"> 
     <h1 style ="color:black;text-align:center;">Travel Time Predictior app</h1> 
-    <h2 style ="color:black;text-align:center;">Bangalore City</h2> 
-    </div> 
+   
     """
       
     # display the front end aspect
     st.markdown(html_temp, unsafe_allow_html = True) 
+    city_list=['Bangalore','Hyderabad']
+    city=st.sidebar.selectbox('Choose the City',city_list)
+    st.write('City: ',city)
+    if city=='Bangalore':
+        coordinate_list=['Select',(12.946538, 77.579975),(13.04438892,77.60185844),(12.95275348,77.72982887)]
+        pkl_filename = "Est_time_pred.pkl"
+    if city=='Hyderabad':
+        coordinate_list=['select', (17.4990737222447,78.5484425537565),(17.3228369187765,78.4003341997112),(17.4289313805497,78.3074137286198),
+                         (17.5338767879618,78.4312953607305),(17.4501231060621,78.3179062429442),(17.5237690238243,78.5091847750287),
+                         (17.4894454531734,78.4112496777986),(17.4308989846564,78.5238677530526),(17.3011570696757,78.4250332621834),
+                         (17.4819236326137,78.5411551171801),(17.3227843624735,78.4201698954023),(17.3858281961646,78.4022854930672)]
+        pkl_filename = "Est_time_pred_hyd.pkl"
+    with open(pkl_filename, 'rb') as file:
+        regressor = pickle.load(file)    
     run()
 
