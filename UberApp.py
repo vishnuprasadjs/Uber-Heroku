@@ -8,8 +8,7 @@ import requests
 import pickle
 import datetime
 import os
-
-
+from IPython.display import display,Javascript
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -46,7 +45,9 @@ def get_driving_route(source_coordinates, dest_coordinates):
     else:
         print('Request failed.')
         return -9999
-    
+
+
+
 
 def get_route(source, destination, date,departure_time,holiday):
     
@@ -91,15 +92,6 @@ def get_route(source, destination, date,departure_time,holiday):
     folium_static(m)
 
 
-
-
-## Adding a background to streamlit page
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-        
-
-
 def run():
     date = st.sidebar.date_input('Select date', datetime.date(2020,1,1))
     time = st.sidebar.time_input('Select time', datetime.time(0,00))
@@ -124,7 +116,8 @@ def run():
         if col1.button('Navigate'):
             get_route(source, destination, date,departure_time,holiday)
         if col2.button("Google Map"):
-            webbrowser.open(url)
+           display(Javascript('window.open("{url}");'.format(url=url)))  
+           # webbrowser.open(url)
     else:
         st.warning("please choose different source or destination")
      
@@ -134,7 +127,7 @@ if __name__ == "__main__":
     # front end elements of the web page 
     html_temp = """ 
     <div style ="background-color:yellow;padding:13px"> 
-    <h1 style ="color:black;text-align:center;">Travel Time Predictior app</h1> 
+    <h1 style ="color:black;text-align:center;">Travel Time Predictor app</h1> 
    
     """
       
