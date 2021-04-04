@@ -11,7 +11,7 @@ import os
 from IPython.display import display,Javascript
 from dotenv import load_dotenv
 load_dotenv()
-
+from bokeh.models.widgets import Div
 ORS_API_KEY = os.getenv('ORS_API_KEY')
 
 
@@ -96,7 +96,7 @@ def get_route(source, destination, date,departure_time,holiday):
 
 def run():
     date = st.sidebar.date_input('Select date', datetime.date(2020,1,1))
-    time = st.sidebar.time_input('Select time', datetime.time(0,00))
+    time = st.sidebar.time_input('Select time', datetime.time(0))
     st.write('Date of Journey:',date)
     st.write('Time:',time)
     points=['Select','Point 1','Point 2','Point 3','Point 4', 'Point 5', 'Point 6', 'Point 7','Point 8','Point 9','Point 10' ]
@@ -121,8 +121,14 @@ def run():
         if col1.button('Navigate'):
             get_route(source, destination, date,departure_time,holiday)
         if col2.button("Google Map"):
-           display(Javascript('window.open("{url}");'.format(url=url)))  
-           # webbrowser.open(url)
+                js = "window.open('https://www.google.com/maps/dir/{},{}/{},{}')".format(source[0],source[1],destination[0],destination[1])  # New tab or window
+                #js = "window.location.href = 'https://www.streamlit.io/'"  # Current tab
+                html = '<img src onerror="{}">'.format(js)
+                div = Div(text=html)
+                st.bokeh_chart(div)
+           #display(Javascript('window.open("{url}");'.format(url=url)))  
+           #webbrowser.open(url)
+           
     else:
         st.warning("please choose different source or destination")
      
